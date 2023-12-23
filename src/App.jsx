@@ -10,14 +10,35 @@ function App() {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
+  const [grouping, setGrouping] = useState("priority");
+  const [ordering, setOrdering] = useState("priority");
 
+  const handleGroupingChange = (value) => {
+    setGrouping(value);
+  };
 
+  const handleOrderingChange = (value) => {
+    setOrdering(value);
+  };
+
+ 
   return (
     
     <>
-      <Header onToggleTheme={toggleTheme} theme={theme} />
+      <Header
+       onToggleTheme={toggleTheme} 
+       theme={theme} 
+        grouping={grouping}
+        ordering={ordering}
+        onGroupingChange={handleGroupingChange}
+        onOrderingChange={handleOrderingChange}
+      
+      />
 
-      <Body theme={theme}  />
+      <Body theme={theme}
+        grouping={grouping} 
+        ordering={ordering} 
+      />
    
     </>
   )
