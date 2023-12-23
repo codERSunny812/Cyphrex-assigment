@@ -27,7 +27,7 @@ const Header = ({ onToggleTheme, theme }) => {
         <Flex alignItems="center" justifyContent="space-between" h="full" style={{ color: theme === 'light' ? '#333' : '#eee' }}>
           <Box>
 
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className=" dropDown_shadow  text-whitefont-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center shadow-lg outline-black " type="button" onClick={hanldeDropDownIcon}> 
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className=" dropDown_shadow  text-whitefont-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  outline-black " type="button" onClick={hanldeDropDownIcon}> 
               <HiAdjustmentsHorizontal className="mx-2" />
 
             Display
