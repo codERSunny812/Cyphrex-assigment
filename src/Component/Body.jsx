@@ -116,7 +116,7 @@ const Body = ({ theme, grouping, ordering }) => {
           flexDirection={isMobile ? "column" : "row"}
           alignItems={isMobile ? "center" : "flex-start"}
           justifyContent={isMobile ? "center" : "flex-start"}
-          border='2px solid black'
+         
         >
           
 
