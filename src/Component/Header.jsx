@@ -1,79 +1,119 @@
 /* eslint-disable react/prop-types */
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
 import { FaMoon } from "react-icons/fa";
 import { LuSun } from "react-icons/lu";
 import { IoChevronUpSharp, IoChevronDownSharp } from "react-icons/io5";
 import { useState } from "react";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
-import './style.css'
 
+const Header = ({
+  onToggleTheme,
+  theme,
+  grouping,
+  ordering,
+  onGroupingChange,
+  onOrderingChange,
+}) => {
+  const [dropDown, setDropDown] = useState(false);
 
+  const handleDropDownIcon = () => {
+    setDropDown(!dropDown);
+  };
 
-
-const Header = ({ onToggleTheme, theme }) => {
-
-  const [dropDown,setDropDown] = useState(false);
-
-  const hanldeDropDownIcon = ()=>{
-    if(!dropDown){
-    setDropDown(true);
-    }else{
-      setDropDown(false);
-    }
-  } 
   return (
-    <>
-      <Box className=" h-[8vh]" style={{ backgroundColor: theme === 'light' ? '#ffffff ' : '#161B22', padding: '10px' }}>
-        <Flex alignItems="center" justifyContent="space-between" h="full" style={{ color: theme === 'light' ? '#333' : '#eee' }}>
-          <Box>
-
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className=" dropDown_shadow  text-whitefont-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  outline-black " type="button" onClick={hanldeDropDownIcon}> 
-              <HiAdjustmentsHorizontal className="mx-2" />
-
+    <Box
+      className="h-[8vh]"
+      backgroundColor={theme === "light" ? "#ffffff" : "#161B22"}
+      padding="10px"
+    >
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        h="full"
+        color={theme === "light" ? "black" : "white"}
+      >
+        <Box position="relative">
+          <button
+            id="dropdownDefaultButton"
+            className=" rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center font-bold"
+            style={{
+              backgroundColor: theme === "light" ? "#ffffff " : "#161B22",
+              padding: "10px",
+              color: theme === "light" ? "black" : "white",
+              boxShadow:
+                theme === "light"
+                  ? "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 2px"
+                  : "0 0 8px 0 #ffffff22",
+            }}
+            type="button"
+            onClick={handleDropDownIcon}
+          >
+            <HiAdjustmentsHorizontal className="mx-2" />
             Display
-            {
-                dropDown ? (<IoChevronUpSharp className="mx-2" />) : (<IoChevronDownSharp className="mx-2" />)
-            }
-             
+            {dropDown ? (
+              <IoChevronUpSharp className="mx-2" />
+            ) : (
+              <IoChevronDownSharp className="mx-2" />
+            )}
+          </button>
 
-            </button>
+          {/* Dropdown menu */}
+          {dropDown && (
+            <Box
+              position="absolute"
+              top="100%"
+              left="0"
+              backgroundColor={theme === "light" ? "#ffffff" : "#161B22"}
+              padding="10px"
+              borderRadius="md"
+              border="1px solid"
+              borderColor={theme === "light" ? "#ccc" : "#333"}
+              zIndex="1"
+              className="flex flex-col"
+            >
+              <Box className=" w-[260px] h-[29px] flex justify-between items-center py-6 mx-2 ">
+                <Text className="text-gray-400 font-semibold">Grouping</Text>
+                <select
+                  className="w-[112px] h-[29px] bg-transparent outline-none px-2 capitalize rounded-md"
+                  style={{ color: theme === "light" ? "black" : "white" }}
+                  value={grouping}
+                  onChange={(e) => onGroupingChange(e.target.value)}
+                >
+                  <option value="priority">priority</option>
+                  <option value="status">status</option>
+                  <option value="user">user</option>
+                </select>
+              </Box>
 
-            {/*  Dropdown menu */}
-            <div id="dropdown" className=" dropDown_shadow mx-32 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg   w-[308px] h-[102px]  dark:bg-gray-700" >
-              <ul className="py-2 mx-2 text-sm text-gray-700 dark:text-gray-200 flex flex-col  items-center justify-center gap-2" aria-labelledby="dropdownDefaultButton" >
-                <li className="  flex justify-between items-center w-[260px] h-[29px]">
-                  <a href="#" className=" block px-4 py-2 capitalize items-center justify-between">grouping</a>
-                  <select className="w-[112px] h-[29px] bg-transparent outline-none px-2 capitalize">
-                    <option value="priority">priority</option>
-                    <option value="status" >status</option>
-                    <option value="user">user</option>
-                  </select>
-                </li>
-                <li className=" flex justify-between items-center w-[260px] h-[29px] focus:outline-none">
-                  <a href="#" className=" block px-4 py-2 capitalize items-center justify-between">ordering</a>
-                  <select className="w-[112px] h-[29px] bg-transparent outline-none active:outline-none px-2 capitalize">
-                    <option value="priority">priority</option>
-                    <option value="title">title</option>
-                  </select>
-                </li>
-                
-              </ul>
-            </div>
+              <Box className="w-[260px] h-[29px] flex justify-between items-center py-6 mx-2">
+                <Text marginTop="2" className="text-gray-400 font-semibold">
+                  Ordering
+                </Text>
+                <select
+                  className="w-[112px] h-[29px] bg-transparent outline-none active:outline-none px-2 capitalize rounded-md"
+                  style={{ color: theme === "light" ? "black" : "white" }}
+                  value={ordering}
+                  onChange={(e) => onOrderingChange(e.target.value)}
+                >
+                  <option value="priority">priority</option>
+                  <option value="title">title</option>
+                </select>
+              </Box>
+            </Box>
+          )}
+        </Box>
 
-            
-
-           
-          </Box>
-
-          {/* theme toggle */}
-          <Box>
-            {
-              theme === 'light' ? (<FaMoon onClick={onToggleTheme} />) : (<LuSun onClick={onToggleTheme}/>)
-            }
-          </Box>
-        </Flex>
-      </Box>
-    </>
+        {/* Theme toggle */}
+        <Spacer />
+        <Box>
+          {theme === "light" ? (
+            <FaMoon onClick={onToggleTheme} />
+          ) : (
+            <LuSun onClick={onToggleTheme} />
+          )}
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 
