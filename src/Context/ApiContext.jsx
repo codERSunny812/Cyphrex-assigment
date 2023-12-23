@@ -9,6 +9,7 @@ export const apiContext = createContext(null);
 const ContextProvider = (props) => {
 // state to store the api response
 const [apiData,setApiData] = useState(null);
+ 
 
 useEffect(()=>{
     // Function to fetch data
@@ -17,7 +18,6 @@ useEffect(()=>{
             const response = await fetch("https://tfyincvdrafxe7ut2ziwuhe5cm0xvsdu.lambda-url.ap-south-1.on.aws/ticketAndUsers");
             const data = await response?.json();
             setApiData(data);
-            // console.log(data);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -25,11 +25,13 @@ useEffect(()=>{
 
     // Call the fetch function
     getApiData();
-},[])
+},[]);
+
+
   
 
     return(
-    <apiContext.Provider value={apiData} >
+    <apiContext.Provider value={{apiData}} >
         {props.children}
     </apiContext.Provider>
     )
