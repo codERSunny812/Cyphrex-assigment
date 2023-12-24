@@ -114,7 +114,7 @@ const isMobile = useBreakpointValue({ base: true, md: false });
         minHeight="100vh"
         backgroundColor={theme === "light" ? "#F4F5F8" : "#000000"}
         color={theme === "light" ? "black" : "white"}
-        border='2px solid black'
+        
       >
 
 
